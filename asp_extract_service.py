@@ -131,7 +131,6 @@ def extract_aspects_method():
             results.append(tmp.decode('utf-8'))
 
     content = {'content': results}
-    print content
     return json.dumps(content, ensure_ascii=False, separators=(',', ': '), indent=4)
     # return jsonify(content=res)
 
