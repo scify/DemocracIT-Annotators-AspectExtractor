@@ -109,13 +109,9 @@ def main(argv):
 
 def extract_aspects_from_text(text):
     predicted_tags = []
-    print text
     text = postag(text)
-    print text
     pos_matches = get_POS_text(text, top_pos_patterns)
-    print pos_matches
     prediction = [' '.join(m) for m in pos_matches]  # if pos_matches else None
-    print prediction
     predicted_tags.append(prediction)
     return predicted_tags
 
@@ -135,6 +131,7 @@ def extract_aspects_method():
             results.append(tmp.decode('utf-8'))
 
     content = {'content': results}
+    print content
     return json.dumps(content, ensure_ascii=False, separators=(',', ': '), indent=4)
     # return jsonify(content=res)
 
