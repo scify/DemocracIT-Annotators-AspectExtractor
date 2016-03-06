@@ -1,6 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# asp extractor service.py #
+# =================================================================================== #
+# this file is a simple web service wrapper that utilizes the logic in asp_extract.py,
+# with minor modifications, in order to server one document at a time.
+#
+# The service requires Flask installed in the system, and may be invoked with
+# a POST request on http://<host>:<port>/aspect_extractor/extract_aspects
+# with parameter text=text_to_extract_aspects_on
+#
+# e.g.
+# curl --data "text=Τεχνικές Προδιαγραφές έργου «Επέκταση Εγκατάστασης Αυτοματοποιημένου Συστήματος Επιτήρησης στην περιοχή του Έβρου" http://127.0.0.1:5001/aspect_extractor/extract_aspects
+
+# response (json)
+# { "content": [ "Τεχνικές Προδιαγραφές έργου" ] }
+#
+# __author__ = George Kiomourtzis <gkiom@scify.org>
+# =================================================================================== #
+
 import subprocess, collections, sys, getopt
 from flask import Flask, request
 
@@ -132,8 +150,6 @@ def extract_aspects_method():
 
     content = {'content': results}
     return json.dumps(content, ensure_ascii=False, separators=(',', ': '), indent=4)
-    # return jsonify(content=res)
-
 
 if __name__ == '__main__':
     import json
